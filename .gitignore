@@ -13,3 +13,5 @@ backend/.env
 # Build folders
 frontend/.next/
 frontend/build/
+# Optional: environment files
+.env
