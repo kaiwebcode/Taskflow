@@ -11,7 +11,7 @@ backend/.env
 *.log
 
 # Build folders
-frontend/.next/
-frontend/build/
+# frontend/.next/
+# frontend/build/
 # Optional: environment files
 .env
