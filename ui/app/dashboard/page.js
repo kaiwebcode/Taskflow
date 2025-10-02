@@ -13,6 +13,7 @@ export default function Dashboard() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [activeTab, setActiveTab] = useState("tasks"); // tasks | profile
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -25,16 +26,16 @@ export default function Dashboard() {
   }, []);
 
   const fetchProfile = async () => {
-  try {
-    const token = localStorage.getItem("token");
-    const res = await API.get("/auth/profile", {
-      headers: { Authorization: `Bearer ${token}` }, // send token
-    });
-    setUser(res.data);
-  } catch (err) {
-    console.error("Error fetching profile", err);
-  }
-};
+    try {
+      const token = localStorage.getItem("token");
+      const res = await API.get("/auth/profile", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setUser(res.data);
+    } catch (err) {
+      console.error("Error fetching profile", err);
+    }
+  };
 
   const fetchTasks = async () => {
     try {
@@ -54,14 +55,58 @@ export default function Dashboard() {
       <DashboardHeader />
 
       <div className="max-w-6xl mx-auto px-4 mt-8 space-y-8">
-        {/* Profile Section */}
-        {user && <ProfileCard user={user} />}
+        {/* Welcome Section */}
+        <div className="bg-white rounded-xl shadow p-6">
+          <h1 className="text-2xl font-bold text-gray-800">Welcome back!</h1>
+          <p className="text-gray-500">
+            Manage your profile and tasks from this dashboard
+          </p>
+        </div>
 
-        {/* Task Form */}
-        <TaskForm fetchTasks={fetchTasks} />
+        {/* Tabs */}
+        <div className="flex border-b border-gray-200">
+          <button
+            onClick={() => setActiveTab("tasks")}
+            className={`px-6 py-2 font-medium ${
+              activeTab === "tasks"
+                ? "border-b-2 border-blue-600 text-blue-600"
+                : "text-gray-500 hover:text-gray-700 cursor-pointer"
+            }`}
+          >
+            Tasks
+          </button>
+          <button
+            onClick={() => setActiveTab("profile")}
+            className={`px-6 py-2 font-medium  ${
+              activeTab === "profile"
+                ? "border-b-2 border-blue-600 text-blue-600"
+                : "text-gray-500 hover:text-gray-700 cursor-pointer"
+            }`}
+          >
+            Profile
+          </button>
+        </div>
 
-        {/* Task List */}
-        <TaskList tasks={tasks} fetchTasks={fetchTasks} loading={loading} />
+        {/* Tab Content */}
+        {activeTab === "tasks" && (
+          <div className="space-y-8 pb-10">
+            {/* Task Form */}
+            <TaskForm fetchTasks={fetchTasks} />
+
+            {/* Task List */}
+            <TaskList tasks={tasks} fetchTasks={fetchTasks} loading={loading} />
+          </div>
+        )}
+
+        {activeTab === "profile" && (
+          <div>
+            {user ? (
+              <ProfileCard user={user} />
+            ) : (
+              <p className="text-gray-500">Loading profile...</p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

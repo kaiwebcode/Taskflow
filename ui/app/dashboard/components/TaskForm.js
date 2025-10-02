@@ -2,59 +2,109 @@
 
 import { useState } from "react";
 import API from "../../utils/api";
-import { motion } from "framer-motion";
 
 export default function TaskForm({ fetchTasks }) {
-  const [newTask, setNewTask] = useState({ title: "", description: "" });
-  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+    status: "Pending",
+    priority: "Medium",
+    dueDate: "",
+  });
 
-  const handleAddTask = async (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      await API.post("/tasks", newTask);
-      setNewTask({ title: "", description: "" });
+      await API.post("/tasks", form);
+      setForm({ title: "", description: "", status: "Pending", priority: "Medium", dueDate: "" });
       fetchTasks();
-    } catch {
-      alert("Error adding task");
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      console.error("Error creating task", err);
     }
   };
 
   return (
-    <motion.form
-      onSubmit={handleAddTask}
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-white p-6 rounded-2xl shadow-lg space-y-4 mt-6"
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white rounded-xl shadow p-6 space-y-4"
     >
-      <h2 className="text-xl font-bold text-gray-700">➕ Add a New Task</h2>
+      <h2 className="text-xl font-semibold text-gray-800">Create Task</h2>
+
+      {/* Title */}
       <input
-        value={newTask.title}
-        onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-        placeholder="Task Title"
-        className="border p-3 rounded-lg w-full focus:ring-2 focus:ring-blue-400 outline-none"
+        type="text"
+        name="title"
+        value={form.title}
+        onChange={handleChange}
+        placeholder="Enter task title"
         required
+        className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
       />
+
+      {/* Description */}
       <textarea
-        value={newTask.description}
-        onChange={(e) =>
-          setNewTask({ ...newTask, description: e.target.value })
-        }
-        placeholder="Task Description"
-        className="border p-3 rounded-lg w-full focus:ring-2 focus:ring-blue-400 outline-none"
-        required
+        name="description"
+        value={form.description}
+        onChange={handleChange}
+        placeholder="Enter task description"
+        rows="3"
+        className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"
       />
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {/* Status */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Status</label>
+          <select
+            name="status"
+            value={form.status}
+            onChange={handleChange}
+            className="w-full border rounded-lg px-3 py-2"
+          >
+            <option>Pending</option>
+            <option>In Progress</option>
+            <option>Completed</option>
+          </select>
+        </div>
+
+        {/* Priority */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Priority</label>
+          <select
+            name="priority"
+            value={form.priority}
+            onChange={handleChange}
+            className="w-full border rounded-lg px-3 py-2"
+          >
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+        </div>
+
+        {/* Due Date */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Due Date</label>
+          <input
+            type="date"
+            name="dueDate"
+            value={form.dueDate}
+            onChange={handleChange}
+            className="w-full border rounded-lg px-3 py-2"
+          />
+        </div>
+      </div>
+
       <button
         type="submit"
-        disabled={loading}
-        className={`bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 transition ${
-          loading ? "opacity-70 cursor-not-allowed" : ""
-        }`}
+        className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition cursor-pointer" 
       >
-        {loading ? "Adding..." : "Add Task"}
+        + Create Task
       </button>
-    </motion.form>
+    </form>
   );
 }

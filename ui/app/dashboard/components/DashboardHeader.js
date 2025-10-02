@@ -22,7 +22,7 @@ export default function DashboardHeader() {
         <Button
           onClick={handleLogout}
           size="sm"
-          className="bg-red-500 hover:bg-red-600"
+          className="bg-red-500 hover:bg-red-600 cursor-pointer"
         >
           <LogOut className="mr-2 h-4 w-4" />
           Logout
