@@ -75,9 +75,7 @@ export default function HomePage() {
           <div className="max-w-3xl mx-auto space-y-6">
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight">
               Modern Web Application
-              <span className="block text-blue-600">
-                with Authentication
-              </span>
+              <span className="block text-blue-600">with Authentication</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground">
               A scalable web application featuring JWT authentication, secure
@@ -126,7 +124,9 @@ export default function HomePage() {
             >
               <CardHeader>
                 <div className="mb-2">{feature.icon}</div>
-                <CardTitle className="text-lg md:text-xl">{feature.title}</CardTitle>
+                <CardTitle className="text-lg md:text-xl">
+                  {feature.title}
+                </CardTitle>
                 <CardDescription className="text-sm md:text-base">
                   {feature.description}
                 </CardDescription>
@@ -140,7 +140,9 @@ export default function HomePage() {
       <section className="container mx-auto px-4 py-16 md:py-20">
         <Card className="max-w-4xl mx-auto">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl sm:text-3xl">Technical Stack</CardTitle>
+            <CardTitle className="text-2xl sm:text-3xl">
+              Technical Stack
+            </CardTitle>
             <CardDescription className="text-sm md:text-base">
               Modern, production-ready technologies
             </CardDescription>
@@ -181,12 +183,14 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="border-t py-8 mt-10 md:mt-20">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p className="text-sm md:text-base">Built with React, Next.js, Shadcn</p>
+          <p className="text-sm md:text-base">
+            Built with React, Next.js, Shadcn
+          </p>
           <p className="mt-2 text-xs md:text-sm">Secure • Scalable • Modern</p>
         </div>
       </footer>
 
-      {/* ✅ Toaster */}
+      {/* Toaster */}
       <Toaster position="top-right" richColors />
     </div>
   );
