@@ -571,7 +571,7 @@ This keeps deployment separate from the CI validation process.
 
 ---
 
-# 🤖 Code Review
+# Code Review
 
 CodeRabbit is used as an additional automated code-review layer through GitHub Pull Requests.
 
@@ -598,7 +598,7 @@ CodeRabbit suggestions are reviewed manually before changes are accepted.
 
 ---
 
-# 🧪 Testing & Verification
+# Testing & Verification
 
 The application was manually verified for the following functionality:
 
@@ -649,7 +649,7 @@ The application was manually verified for the following functionality:
 
 ---
 
-# 🚀 Production Deployment
+# Production Deployment
 
 ## Frontend
 
@@ -673,7 +673,7 @@ MongoDB Atlas is used for persistent task and user data.
 
 ---
 
-# ⚠️ Known Considerations
+# Known Considerations
 
 * The project uses JavaScript rather than TypeScript.
 * Overdue status is calculated from the task due date and current status rather than stored as a separate database field.
@@ -682,7 +682,7 @@ MongoDB Atlas is used for persistent task and user data.
 
 ---
 
-# 📸 Screenshots
+# Screenshots
 
 Screenshots and demo media can be added to this section before submission.
 
@@ -699,7 +699,7 @@ Recommended screenshots:
 
 ---
 
-# 📚 Assignment Requirements
+# Assignment Requirements
 
 | Requirement              | Status |
 | ------------------------ | ------ |
@@ -728,7 +728,7 @@ Recommended screenshots:
 
 ---
 
-# 📝 AI Usage
+# AI Usage
 
 Detailed AI usage is documented separately in:
 
@@ -740,7 +740,7 @@ The document describes how ChatGPT and CodeRabbit were used during development a
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 **Kaif Qureshi**
 
