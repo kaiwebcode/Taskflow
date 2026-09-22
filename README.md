@@ -1,45 +1,57 @@
 # TaskFlow — Task Management Dashboard
 
-A responsive full-stack task management dashboard built with Next.js, JavaScript, Node.js, Express.js, MongoDB, and JWT authentication.
+TaskFlow is a responsive full-stack task management dashboard built for the Developer Technical Assessment.
 
-TaskFlow allows authenticated users to create, view, search, filter, edit, update, and delete tasks through a responsive dashboard designed for both desktop and mobile devices.
+It allows authenticated users to create, view, search, filter, edit, update, and delete tasks through a responsive dashboard designed for desktop, tablet, and mobile devices.
 
-## Live Demo:-
+The application uses a Next.js frontend with a Node.js/Express.js backend, MongoDB for persistent storage, and JWT-based authentication.
 
-**Frontend:**
-https://taskflow-frontend-tau.vercel.app
+## Live Demo
 
-**Backend API:**
-https://taskflow-uomk.onrender.com
+### Frontend
 
-**GitHub Repository:**
-https://github.com/kaiwebcode/Taskflow
+TaskFlow Frontend: `https://taskflow-frontend-tau.vercel.app`
+
+### Backend API
+
+TaskFlow Backend: `https://taskflow-uomk.onrender.com`
+
+### GitHub Repository
+
+TaskFlow Repository: `https://github.com/kaiwebcode/Taskflow`
 
 ---
 
-## Project Overview
+# Project Overview
 
 TaskFlow was developed as a full-stack task management solution for managing employee-related tasks across different stores.
 
-The application includes:
+The application provides:
 
-* User authentication
-* Task management
+* User registration and login
+* JWT authentication
+* Protected task APIs
+* Task creation and management
 * Task status management
+* Task priority management
 * Search and filtering
 * Task validation
-* API error handling
-* Summary statistics
+* API and authentication error handling
+* Dashboard summary statistics
 * Responsive desktop and mobile UI
 * Production deployment
-* Automated CI checks
-* AI-assisted code review
+* GitHub Actions CI
+* CodeRabbit pull-request code review
+
+The project was developed using JavaScript. TypeScript was suggested by the assessment, but it was not mandatory, so the implementation uses JavaScript throughout the frontend.
 
 ---
 
-## Features:-
+# Features
 
-### Authentication
+## Authentication
+
+TaskFlow includes:
 
 * User registration
 * User login
@@ -47,11 +59,15 @@ The application includes:
 * Protected task APIs
 * Authenticated dashboard access
 * Logout functionality
-* Invalid/expired authentication handling
+* Authentication error handling
 
-### Task Management
+The backend verifies the JWT before allowing access to protected task operations.
 
-Users can:
+---
+
+## Task Management
+
+Authenticated users can:
 
 * Create tasks
 * View tasks
@@ -64,37 +80,51 @@ Users can:
 * Set a due date
 * Add task descriptions
 
-### Task Status
+---
 
-Supported statuses:
+## Task Status
 
-* Pending
-* In Progress
-* Completed
+Supported task statuses:
 
-### Priority
+```text
+Pending
+In Progress
+Completed
+```
+
+---
+
+## Task Priority
 
 Supported priorities:
 
-* Low
-* Medium
-* High
+```text
+Low
+Medium
+High
+```
 
-### Search & Filters
+---
+
+## Search and Filters
 
 Tasks can be searched and filtered by:
 
 * Task title
-* Description
+* Task description
 * Employee
 * Store
 * Status
 * Priority
 * Due date
 
-Multiple filters can be combined, and all filters can be cleared easily.
+Multiple filters can be combined.
 
-### Dashboard Summary
+A clear-filters action is also provided to reset the current filtering state.
+
+---
+
+## Dashboard Summary
 
 The dashboard provides summary cards for:
 
@@ -103,9 +133,13 @@ The dashboard provides summary cards for:
 * Completed tasks
 * Overdue tasks
 
-Overdue tasks are calculated based on the due date and current task status. Completed tasks are not considered overdue.
+Overdue tasks are calculated using the task due date and current task status.
 
-### Validation & Error Handling
+A task is considered overdue when its due date has passed and its status is not `Completed`.
+
+---
+
+# Validation and Error Handling
 
 The application includes:
 
@@ -120,8 +154,14 @@ The application includes:
 * Loading states
 * Empty states
 * User-friendly toast notifications
+* Delete confirmation
+* Invalid API response handling
 
-### Responsive Design
+Validation is implemented on the backend as well as through the frontend user interface.
+
+---
+
+# Responsive Design
 
 The dashboard is designed for:
 
@@ -130,21 +170,22 @@ The dashboard is designed for:
 * Tablet
 * Mobile
 
-On smaller screens, the task table changes to a card-based layout for better usability.
+On smaller screens, the desktop task table changes into a card-based layout so that task information remains usable on narrow screens.
 
 ---
 
-## 🛠️ Tech Stack
+# Tech Stack
 
-### Frontend
+## Frontend
 
 * Next.js
 * React
 * JavaScript
 * CSS
 * Lucide Icons
+* Sonner
 
-### Backend
+## Backend
 
 * Node.js
 * Express.js
@@ -153,56 +194,89 @@ On smaller screens, the task table changes to a card-based layout for better usa
 * JSON Web Token (JWT)
 * bcrypt
 
-### Deployment
+## Deployment
 
 * Vercel — Frontend
 * Render — Backend
 * MongoDB Atlas — Database
 
-### Development & Code Quality
+## Development and Code Quality
 
 * Git
 * GitHub
 * GitHub Actions
 * CodeRabbit
 
-> TypeScript was listed as a suggested technology in the assignment. This implementation uses JavaScript.
+> TypeScript was suggested as part of the assessment's recommended stack. This implementation uses JavaScript.
 
 ---
 
-## 🏗️ Architecture
+# Architecture
 
 ```text
-                    ┌─────────────────────┐
-                    │       User          │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │   Next.js Frontend  │
-                    │     JavaScript      │
-                    │       Vercel        │
-                    └──────────┬──────────┘
-                               │
-                         REST API / JWT
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │  Express.js Backend │
-                    │       Node.js       │
-                    │       Render        │
-                    └──────────┬──────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │      MongoDB        │
-                    │    MongoDB Atlas    │
-                    └─────────────────────┘
+                         ┌─────────────────────┐
+                         │        User         │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │   Next.js Frontend  │
+                         │      JavaScript     │
+                         │       Vercel        │
+                         └──────────┬──────────┘
+                                    │
+                              REST API + JWT
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │  Express.js Backend │
+                         │       Node.js       │
+                         │       Render        │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │      MongoDB        │
+                         │    MongoDB Atlas    │
+                         └─────────────────────┘
 ```
 
 ---
 
-## 📁 Project Structure
+# Authentication Flow
+
+TaskFlow uses JWT-based authentication.
+
+```text
+User
+ │
+ ▼
+Register / Login
+ │
+ ▼
+Backend validates credentials
+ │
+ ▼
+JWT token generated
+ │
+ ▼
+Frontend stores authentication token
+ │
+ ▼
+Token attached to protected API requests
+ │
+ ▼
+Backend authentication middleware
+ │
+ ▼
+Protected task API
+```
+
+The authentication middleware verifies the token before allowing access to protected task endpoints.
+
+---
+
+# Project Structure
 
 ```text
 Taskflow/
@@ -228,6 +302,7 @@ Taskflow/
 │   │   ├── login/
 │   │   ├── register/
 │   │   └── ...
+│   │
 │   ├── components/
 │   ├── app/utils/
 │   ├── package.json
@@ -240,517 +315,6 @@ Taskflow/
 
 ---
 
-## ⚙️ Requirements
+# Requirements
 
-Before running the project locally, make sure you have installed:
-
-* Node.js 20+
-* npm
-* Git
-* MongoDB Atlas account or a MongoDB instance
-
----
-
-# 🔧 Local Setup
-
-## 1. Clone the Repository
-
-```bash
-git clone https://github.com/kaiwebcode/Taskflow.git
-cd Taskflow
-```
-
----
-
-## 2. Backend Setup
-
-Navigate to the backend:
-
-```bash
-cd Backend
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Create a `.env` file:
-
-```env
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-```
-
-Do not commit the `.env` file to GitHub.
-
-Start the backend:
-
-```bash
-npm start
-```
-
-The backend will run on:
-
-```text
-http://localhost:5000
-```
-
----
-
-## 3. Frontend Setup
-
-Open another terminal and navigate to the frontend:
-
-```bash
-cd ui
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Create:
-
-```text
-ui/.env.local
-```
-
-Add:
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:5000/api
-```
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-The frontend will run on:
-
-```text
-http://localhost:3000
-```
-
----
-
-# 🔐 Environment Variables
-
-## Backend
-
-Create:
-
-```text
-Backend/.env
-```
-
-Required variables:
-
-```env
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-```
-
-## Frontend
-
-Create:
-
-```text
-ui/.env.local
-```
-
-For local development:
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:5000/api
-```
-
-For production:
-
-```env
-NEXT_PUBLIC_API_URL=https://taskflow-uomk.onrender.com/api
-```
-
-### Security
-
-Environment files containing secrets are excluded from Git using `.gitignore`.
-
-Never commit:
-
-```text
-.env
-.env.local
-```
-
----
-
-# 🔌 API Endpoints
-
-The backend exposes REST APIs under:
-
-```text
-/api
-```
-
-## Authentication
-
-### Register
-
-```http
-POST /api/auth/register
-```
-
-### Login
-
-```http
-POST /api/auth/login
-```
-
-### Get Profile
-
-```http
-GET /api/auth/profile
-```
-
-Requires authentication.
-
----
-
-## Tasks
-
-### Get Tasks
-
-```http
-GET /api/tasks
-```
-
-Requires authentication.
-
-### Create Task
-
-```http
-POST /api/tasks
-```
-
-Requires authentication.
-
-### Update Task
-
-```http
-PUT /api/tasks/:id
-```
-
-Requires authentication.
-
-### Change Task Status
-
-```http
-PATCH /api/tasks/:id/status
-```
-
-Requires authentication.
-
-### Delete Task
-
-```http
-DELETE /api/tasks/:id
-```
-
-Requires authentication.
-
----
-
-# 🔑 Authentication Flow
-
-TaskFlow uses JWT-based authentication.
-
-```text
-User
- │
- ▼
-Login
- │
- ▼
-Backend validates credentials
- │
- ▼
-JWT token generated
- │
- ▼
-Frontend stores authentication token
- │
- ▼
-Token attached to protected API requests
- │
- ▼
-Backend authentication middleware
- │
- ▼
-Protected task API
-```
-
-The backend verifies the JWT before allowing access to protected task operations.
-
----
-
-# 📊 Task Data
-
-A task can contain information such as:
-
-```text
-Title
-Description
-Employee
-Store
-Status
-Priority
-Due Date
-Created At
-Updated At
-```
-
-Supported status values:
-
-```text
-Pending
-In Progress
-Completed
-```
-
-Supported priority values:
-
-```text
-Low
-Medium
-High
-```
-
----
-
-# 🔄 CI/CD
-
-TaskFlow uses GitHub Actions for continuous integration.
-
-The CI workflow runs when changes are pushed or when a Pull Request is created for the configured branches.
-
-The workflow performs:
-
-```text
-GitHub
-   │
-   ▼
-GitHub Actions
-   │
-   ├── Checkout repository
-   ├── Setup Node.js
-   ├── Install frontend dependencies
-   ├── Build frontend
-   └── Install backend dependencies
-```
-
-### Deployment
-
-Production deployment is handled through:
-
-```text
-GitHub
-   │
-   ├── Vercel → Frontend
-   │
-   └── Render → Backend
-```
-
-This keeps deployment separate from the CI validation process.
-
----
-
-# Code Review
-
-CodeRabbit is used as an additional automated code-review layer through GitHub Pull Requests.
-
-The workflow is:
-
-```text
-Feature Branch
-      │
-      ▼
-Pull Request
-      │
-      ├── CodeRabbit Review
-      │
-      └── GitHub Actions CI
-      │
-      ▼
-Developer Review
-      │
-      ▼
-Merge
-```
-
-CodeRabbit suggestions are reviewed manually before changes are accepted.
-
----
-
-# Testing & Verification
-
-The application was manually verified for the following functionality:
-
-### Authentication
-
-* Login
-* Protected dashboard access
-* Authentication error handling
-
-### Task Management
-
-* Create task
-* Edit task
-* Change task status
-* Delete task
-
-### Search & Filtering
-
-* Search by task information
-* Employee filter
-* Store filter
-* Status filter
-* Priority filter
-* Due-date filter
-* Combined filters
-* Clear filters
-
-### Dashboard
-
-* Total count
-* Pending count
-* Completed count
-* Overdue count
-
-### Validation
-
-* Required fields
-* Task title validation
-* Employee/store validation
-* Due-date validation
-* Description length validation
-
-### Responsive UI
-
-* Desktop
-* Tablet
-* Mobile
-
----
-
-# Production Deployment
-
-## Frontend
-
-The Next.js frontend is deployed using Vercel.
-
-Production URL:
-
-https://taskflow-frontend-tau.vercel.app
-
-## Backend
-
-The Node.js/Express backend is deployed using Render.
-
-Production URL:
-
-https://taskflow-uomk.onrender.com
-
-## Database
-
-MongoDB Atlas is used for persistent task and user data.
-
----
-
-# Known Considerations
-
-* The project uses JavaScript rather than TypeScript.
-* Overdue status is calculated from the task due date and current status rather than stored as a separate database field.
-* Production API availability depends on the deployed Render backend.
-* Environment variables must be configured correctly for local and production environments.
-
----
-
-# Screenshots
-
-Screenshots and demo media can be added to this section before submission.
-
-Recommended screenshots:
-
-1. Login
-2. Dashboard
-3. Task creation/edit form
-4. Search and filters
-5. Task status management
-6. Mobile responsive layout
-7. GitHub Actions
-8. CodeRabbit Pull Request review
-
----
-
-# Assignment Requirements
-
-| Requirement              | Status |
-| ------------------------ | ------ |
-| Simple login             | ✅      |
-| Display tasks in a table | ✅      |
-| Search tasks             | ✅      |
-| Filter by employee       | ✅      |
-| Filter by date           | ✅      |
-| Filter by status         | ✅      |
-| Filter by store          | ✅      |
-| Create task              | ✅      |
-| Edit task                | ✅      |
-| Change task status       | ✅      |
-| Total summary            | ✅      |
-| Pending summary          | ✅      |
-| Completed summary        | ✅      |
-| Overdue summary          | ✅      |
-| API error handling       | ✅      |
-| Validation               | ✅      |
-| Desktop responsive UI    | ✅      |
-| Mobile responsive UI     | ✅      |
-| Backend API              | ✅      |
-| Production deployment    | ✅      |
-| CI workflow              | ✅      |
-| AI-assisted code review  | ✅      |
-
----
-
-# AI Usage
-
-Detailed AI usage is documented separately in:
-
-```text
-AI_USAGE.md
-```
-
-The document describes how ChatGPT and CodeRabbit were used during development and how AI-generated suggestions were reviewed and tested.
-
----
-
-# Author
-
-**Kaif Qureshi**
-
-Full-Stack / Frontend Developer
-
-GitHub:
-https://github.com/kaiwebcode
-
----
-
-## 📄 License
-
-This project was created as part of a technical assignment and portfolio work.
+Before running TaskFlow
